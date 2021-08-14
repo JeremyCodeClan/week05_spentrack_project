@@ -9,7 +9,13 @@ def save(merchant):
     merchant.id = id
 
 def select_all():
-    pass
+    merchants = []
+    sql = "SELECT * FROM merchants"
+    results = run_sql(sql)
+    for row in results:
+        merchant = Merchant(row['name'], row['id'])
+        merchants.append(merchant)
+    return merchants
 
 def select(id):
     pass
