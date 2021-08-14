@@ -9,7 +9,13 @@ def save(tag):
     tag.id = id
 
 def select_all():
-    pass
+    tags = []
+    sql = "SELECT * FROM tags"
+    results = run_sql(sql)
+    for row in results:
+        tag = Tag(row['name'], row['id'])
+        tags.append(tag)
+    return tags
 
 def select(id):
     pass
