@@ -18,7 +18,11 @@ def select_all():
     return tags
 
 def select(id):
-    pass
+    sql = "SELECT * FROM tags WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+    tag = Tag(result['name'], result['id'])
+    return tag
 
 def delete_all():
     sql = "DELETE FROM tags"
