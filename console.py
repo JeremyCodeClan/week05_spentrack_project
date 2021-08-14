@@ -6,6 +6,7 @@ import repositories.merchant_repository as merchant_repo
 import repositories.tag_repository as tag_repo
 
 merchant_repo.delete_all()
+tag_repo.delete_all()
 
 merchant_1 = Merchant("Tesco")
 merchant_repo.save(merchant_1)
