@@ -9,7 +9,7 @@ import repositories.transaction_repository as transaction_repo
 
 merchant_repo.delete_all()
 tag_repo.delete_all()
-# transaction_repo.delete_all()
+transaction_repo.delete_all()
 
 merchant_1 = Merchant("Tesco")
 merchant_repo.save(merchant_1)
