@@ -24,3 +24,13 @@ def new():
         "transactions/new.html", 
         transactions = transactions, total = total, login = 1, new_cancel = 1
         )
+
+@transactions_blueprint.route("/jeremy_e51", methods=['POST'])
+def add_transaction():
+    name = request.form['name']
+    description = request.form['description']
+    amount = request.form['amount']
+    date = request.form['date']
+    transaction = Transaction(name, description, amount, date)
+    transaction_repo.save(transaction)
+    return redirect('/jeremy_e51')
