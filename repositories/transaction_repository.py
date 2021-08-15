@@ -16,13 +16,17 @@ def save(transaction):
 
 def select_all():
     transactions = []
-    sql = "SELECT * FROM transactions"
+    sql = "SELECT * FROM transactions ORDER BY id DESC"
     results = run_sql(sql)
     for row in results:
+        tag = None
+        merchant = None
+        if row['tag_id'] != None: tag = tag_repo.select(row['tag_id'])
+        if row['merchant_id'] != None: merchant = merchant_repo.select(row['merchant_id'])
         transaction = Transaction(
             row['name'], row['description'],
-            row['amount'], row['tag_id'],
-            row['merchant_id'], row['id']
+            row['amount'], tag,
+            merchant, row['id']
             )
         transactions.append(transaction)
     return transactions
