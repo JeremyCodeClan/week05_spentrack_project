@@ -47,5 +47,11 @@ def delete(id):
     values = [id]
     run_sql(sql, values)
 
-def update(tag):
-    pass
+def update(transaction):
+    sql = "UPDATE transactions SET (name, description, amount, tag_id, merchant_id) = (%s, %s, %s, %s, %s) WHERE id = %s"
+    tag_id = None
+    merchant_id = None
+    if transaction.tag != None: tag_id = transaction.tag.id
+    if transaction.merchant != None: merchant_id = transaction.merchant.id   
+    values = [transaction.name, transaction.description, transaction.amount, tag_id, merchant_id, transaction.id]
+    run_sql(sql, values)
