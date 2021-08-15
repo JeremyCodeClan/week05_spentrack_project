@@ -17,6 +17,7 @@ CREATE TABLE transactions (
     name VARCHAR(255),
     description TEXT,
     amount INT,
+    date VARCHAR(255),
     tag_id INT NULL REFERENCES tags(id),
     merchant_id INT NULL REFERENCES merchants(id)
 );
