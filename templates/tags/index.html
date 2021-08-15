@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for tag in tags %}
+        <div>
+            <hr>
+            <span>{{ tag.id }}</span>
+            /
+            <span>{{ tag.name }}</span>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock  %}
