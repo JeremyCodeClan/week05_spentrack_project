@@ -7,7 +7,7 @@ import repositories.tag_repository as tag_repo
 
 tags_blueprint = Blueprint("tags", __name__)
 
-@tags_blueprint.route("/tags")
+@tags_blueprint.route("/jeremy_e51/tags")
 def tags():
     tags = tag_repo.select_all()
-    return render_template("tags/index.html", tags = tags)
+    return render_template("tags/index.html", tags = tags, login = 1)
