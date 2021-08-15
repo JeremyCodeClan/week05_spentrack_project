@@ -17,6 +17,6 @@ CREATE TABLE transactions (
     name VARCHAR(255),
     description TEXT,
     amount INT,
-    tag_id SERIAL REFERENCES tags(id),
-    merchant_id SERIAL REFERENCES merchants(id)
+    tag_id INT NULL REFERENCES tags(id),
+    merchant_id INT NULL REFERENCES merchants(id)
 );
