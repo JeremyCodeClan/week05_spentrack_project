@@ -15,3 +15,12 @@ def transactions():
         "transactions/index.html", 
         transactions = transactions, total = total, login = 1
         )
+
+@transactions_blueprint.route("/jeremy_e51/new")
+def new():
+    transactions = transaction_repo.select_all()
+    total = transaction_repo.total_amount(transactions)
+    return render_template(
+        "transactions/new.html", 
+        transactions = transactions, total = total, login = 1, new_cancel = 1
+        )
