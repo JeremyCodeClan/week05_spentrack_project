@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Spending Tracker</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1><a href="/">Spending Tracker</a></h1>
+        </div>
+        <nav>
+            <ul>
+                {% if login %}
+                    <li>jeremy_e51</li>
+                    <li><a href="/">Sign Out</a></li>
+                {% else %}
+                    <li><a href="/jeremy_e51">Sign In</a></li>
+                    <li><a href="/">Sign Up</a></li>
+                {% endif %}
+                
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <ul>
+            <li><a href="/jeremy_e51">All</a></li>
+            <li><a href="/merchants">Merchants</a></li>
+            <li><a href="/tags">Tags</a></li>
+        </ul>
+    </section>
+    <main>
+        {% block content %}
+        {% endblock  %}
+    </main>
+    <footer>
+        <section>
+            <div>
+                <div>SpenTrack ©</div>
+                <div>
+                    <p>2021-2021 JEREMY individual contributor.</p>
+                    <p>Content is available under no licenses.</p>
+                </div>
+            </div>
+        </section>
+    </footer>
+</body>
+</html>
