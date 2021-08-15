@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for transaction in transactions %}
+        <div>
+            <hr>
+            <span>{{ transaction.id }}</span>
+            /
+            <span>{{ transaction.name }}</span>
+            /
+            <span>{{ transaction.description }}</span>
+            /
+            <span>
+                {% if transaction.tag != None %}
+                    {{ transaction.tag.name }}
+                {% else %}
+                    None
+                {% endif %}
+            </span>
+            /
+            <span>
+                {% if transaction.tag != None %}
+                    {{ transaction.merchant.name }}
+                {% else %}
+                    None
+                {% endif %}
+            </span>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock  %}
