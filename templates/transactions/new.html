@@ -1,0 +1,27 @@
+{% extends 'transactions/index.html' %}
+
+{% block transaction_new %}
+    <form action="/jeremy_e51" method="POST">
+        <hr>
+            <label for="name">Name :</label>
+            <input type="text" name="name" id="name" required>
+            <label for="description">Description: </label>
+            <textarea id="description" name="description" cols="30" rows="2" required></textarea>
+            <label for="amount">Amount: </label>
+            <input type="number" name="amount" id="amount" required>
+            <label for="date">Date: </label>
+            <input type="date" name="date" id="date" required>
+            <button>Add</button>
+            <a href="/jeremy_e51" class="cancel-button">Cancel</a>
+        <hr>
+    </form>
+{% endblock  %}
+
+<!-- 
+id SERIAL PRIMARY KEY,
+name VARCHAR(255),
+description TEXT,
+amount INT,
+date INT,
+tag_id INT NULL REFERENCES tags(id),
+merchant_id INT NULL REFERENCES merchants(id) -->
