@@ -7,7 +7,7 @@ import repositories.tag_repository as tag_repo
 
 merchants_blueprint = Blueprint("merchants", __name__)
 
-@merchants_blueprint.route("/merchants")
+@merchants_blueprint.route("/jeremy_e51/merchants")
 def merchants():
     merchants = merchant_repo.select_all()
-    return render_template("merchants/index.html", merchants = merchants)
+    return render_template("merchants/index.html", merchants = merchants, login = 1)
