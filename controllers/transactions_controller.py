@@ -10,4 +10,8 @@ transactions_blueprint = Blueprint("transactions", __name__)
 @transactions_blueprint.route("/jeremy_e51")
 def transactions():
     transactions = transaction_repo.select_all()
-    return render_template("transactions/index.html", transactions = transactions, login = 1)
+    total = transaction_repo.total_amount(transactions)
+    return render_template(
+        "transactions/index.html", 
+        transactions = transactions, total = total, login = 1
+        )
