@@ -10,7 +10,7 @@
 <body>
     <header>
         <div>
-            <h1><a href="/">Spending Tracker</a></h1>
+            <h1><a href="/">SpenTrack</a></h1>
         </div>
         <nav>
             <ul>
@@ -21,18 +21,17 @@
                     <li><a href="/jeremy_e51">Sign In</a></li>
                     <li><a href="/">Sign Up</a></li>
                 {% endif %}
-                
             </ul>
         </nav>
     </header>
-    <section>
-        <ul>
-            <li><a href="/jeremy_e51">All</a></li>
-            <li><a href="/merchants">Merchants</a></li>
-            <li><a href="/tags">Tags</a></li>
-        </ul>
-    </section>
     <main>
+        <section>
+            <ul>
+                <li><a href="/jeremy_e51">Transactions</a></li>
+                <li><a href="/jeremy_e51/merchants">Merchants</a></li>
+                <li><a href="/jeremy_e51/tags">Tags</a></li>
+            </ul>
+        </section>
         {% block content %}
         {% endblock  %}
     </main>
@@ -42,7 +41,6 @@
                 <div>SpenTrack ©</div>
                 <div>
                     <p>2021-2021 JEREMY individual contributor.</p>
-                    <p>Content is available under no licenses.</p>
                 </div>
             </div>
         </section>
