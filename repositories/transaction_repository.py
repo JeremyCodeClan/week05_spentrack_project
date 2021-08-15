@@ -19,12 +19,24 @@ def select_all():
     sql = "SELECT * FROM transactions"
     results = run_sql(sql)
     for row in results:
-        transaction = Transaction(row['name'], row['description'], row['amount'], row['tag_id'], row['merchant_id'], row['id'])
+        transaction = Transaction(
+            row['name'], row['description'],
+            row['amount'], row['tag_id'],
+            row['merchant_id'], row['id']
+            )
         transactions.append(transaction)
     return transactions
 
 def select(id):
-    pass
+    sql = "SELECT * FROM transactions WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+    transaction = Transaction(
+            result['name'], result['description'],
+            result['amount'], result['tag_id'],
+            result['merchant_id'], result['id']
+            )
+    return transaction
 
 def delete_all():
     sql = "DELETE FROM transactions"
