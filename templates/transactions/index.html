@@ -1,14 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h2><b>Available balance:</b> £ {{ 1000 - total }}</h2>
+    <h3><b>Transactions total:</b> £ {{ total }}</h3>
+    {% if new_cancel != 1 %}
+        <a href="/jeremy_e51/new"><button>New</button></a>
+    {% endif %}
+    {% block transaction_new %}
+    {% endblock %}
     {% for transaction in transactions %}
         <div>
             <hr>
-            <span>{{ transaction.id }}</span>
+            <span>{{ transaction.date }}</span>
             /
+            <a href="/jeremy_e51/{{ transaction.id }}">
             <span>{{ transaction.name }}</span>
             /
             <span>{{ transaction.description }}</span>
+            </a>
+            /
+            <span>£ {{ transaction.amount }}</span>
             /
             <span>
                 {% if transaction.tag != None %}
@@ -19,7 +30,7 @@
             </span>
             /
             <span>
-                {% if transaction.tag != None %}
+                {% if transaction.merchant != None %}
                     {{ transaction.merchant.name }}
                 {% else %}
                     None
