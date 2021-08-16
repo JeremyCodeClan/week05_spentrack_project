@@ -48,14 +48,19 @@ def edit_transaction(id):
 
 @transactions_blueprint.route("/jeremy_e51/<id>", methods=['POST'])
 def update_transaction(id):
-    tag_id = request.form["tag_id"]
-    print(tag_id)
-    merchant_id = request.form["merchant_id"]
-    print(merchant_id)
-    tag = tag_repo.select(tag_id)
-    merchant = merchant_repo.select(merchant_id)
     transaction = transaction_repo.select(id)
-    transaction.tag = tag
-    transaction.merchant = merchant
+
+    if "tag_id" in request.form:
+        if request.form["tag_id"] != "None":
+            tag_id = request.form["tag_id"]
+            tag = tag_repo.select(tag_id)
+            transaction.tag = tag
+
+    if "merchant_id" in request.form:
+        if request.form["merchant_id"] != "None":
+            merchant_id = request.form["merchant_id"]
+            merchant = tag_repo.select(merchant_id)
+            transaction.merchant = merchant
+
     transaction_repo.update(transaction)
     return redirect('/jeremy_e51')
