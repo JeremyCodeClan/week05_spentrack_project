@@ -10,9 +10,9 @@
     {% for merchant in merchants %}
     <div>
         <hr>
-        <span>{{ merchant.id }}</span>
-        /
         <span>{{ merchant.name }}</span>
+        /
+        <span>Total: £ {{ merchant.total }}</span>
         <hr>
     </div>
     {% endfor %}
