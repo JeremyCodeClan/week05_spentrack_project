@@ -34,3 +34,14 @@ def add_transaction():
     transaction = Transaction(name, description, amount, date)
     transaction_repo.save(transaction)
     return redirect('/jeremy_e51')
+
+@transactions_blueprint.route("/jeremy_e51/<id>/edit")
+def edit_transaction(id):
+    transactions = transaction_repo.select_all()
+    total = transaction_repo.total_amount(transactions)
+    merchants = merchant_repo.select_all()
+    tags = tag_repo.select_all()
+    return render_template(
+        'transactions/edit.html',
+        transactions = transactions, merchants = merchants, tags = tags, id = int(id), total = total, login = 1
+        )
