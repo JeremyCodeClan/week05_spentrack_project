@@ -8,7 +8,11 @@ def save(transaction):
     tag_id = None
     merchant_id = None
     if transaction.tag != None: tag_id = transaction.tag.id
-    if transaction.merchant != None: merchant_id = transaction.merchant.id    
+    if transaction.merchant != None:
+        merchant_id = transaction.merchant.id
+        merchant = merchant_repo.select(merchant_id)
+        merchant.total += transaction.amount
+        merchant_repo.update(merchant)
     values = [transaction.name, transaction.description, transaction.amount, transaction.date, tag_id, merchant_id]
     result = run_sql(sql, values)
     id = result[0]['id']
@@ -55,8 +59,19 @@ def update(transaction):
     sql = "UPDATE transactions SET (name, description, amount, date, tag_id, merchant_id) = (%s, %s, %s, %s, %s, %s) WHERE id = %s"
     tag_id = None
     merchant_id = None
-    if transaction.tag != None: tag_id = transaction.tag.id
-    if transaction.merchant != None: merchant_id = transaction.merchant.id   
+    if transaction.merchant is not None:
+        if type(transaction.merchant) != int:
+            merchant_id = transaction.merchant.id
+            merchant = merchant_repo.select(merchant_id)
+            merchant.total += transaction.amount
+            merchant_repo.update(merchant)
+        else:
+            merchant_id = transaction.merchant
+    if transaction.tag is not None:
+        if type(transaction.tag) != int:
+            tag_id = transaction.tag.id
+        else:
+            tag_id = transaction.tag          
     values = [transaction.name, transaction.description, transaction.amount, transaction.date, tag_id, merchant_id, transaction.id]
     run_sql(sql, values)
 
