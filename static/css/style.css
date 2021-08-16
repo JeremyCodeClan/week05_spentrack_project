@@ -1,0 +1,63 @@
+html {
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin:0 auto;
+    width: 75%;
+}
+
+head {
+    height: 15vh;
+}
+
+.tabs {
+    margin: 1rem 0;
+}
+
+footer {
+    height: 10vh;
+    margin-top: 3rem;
+}
+
+a, ul, li, p, div {
+    margin:0;
+    padding:0;
+    text-decoration: none;
+    list-style: none;
+    color: inherit;
+}
+
+a:hover, li:hover {
+    color: darkslategrey;
+    background:lightgoldenrodyellow;
+}
+
+button, .cancel-button {
+    font-size: 1rem;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    background: darkslategrey;
+    color: white;
+}
+
+.cancel-button {
+    background: darkred;
+}
+
+button:hover, .cancel-button:hover {
+    cursor: pointer;
+    background: lightseagreen;
+    color: white;
+}
+
+.cancel-button:hover {
+    background: rgb(226, 42, 42);
+}
+
+.input-margin {
+    margin: 0.5rem 0;
+}
