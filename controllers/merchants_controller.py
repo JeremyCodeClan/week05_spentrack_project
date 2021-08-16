@@ -19,3 +19,10 @@ def new():
         "merchants/new.html", 
         merchants = merchants, login = 1, new_cancel = 1
         )
+
+@merchants_blueprint.route("/jeremy_e51/merchants", methods=['POST'])
+def add_merchant():
+    name = request.form['name']
+    merchant = Merchant(name)
+    merchant_repo.save(merchant)
+    return redirect('/jeremy_e51/merchants')
