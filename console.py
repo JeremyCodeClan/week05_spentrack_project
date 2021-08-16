@@ -12,13 +12,11 @@ tag_repo.delete_all()
 transaction_repo.delete_all()
 
 
+transaction_6 = Transaction("Citylink Bus", "travel count: 12, switched to daily: 4", 20, "2021-05-15")
+transaction_repo.save(transaction_6)
+transaction_5 = Transaction("Aldi food", "lemon: 3, pizzas: 2, chocolate: 3, apple: 2", 25, "2021-05-02")
+transaction_repo.save(transaction_5)
 
-
-
-# transaction_6 = Transaction("Blizzard games", "Starcraft_II: 1, Overwatch: 1", 40, "2021-05-05", tag_2, merchant_2)
-# transaction_repo.save(transaction_6)
-# transaction_5 = Transaction("Blizzard games", "Starcraft_II: 1, Overwatch: 1", 40, "2021-05-05", tag_2, merchant_2)
-# transaction_repo.save(transaction_5)
 
 # merchant, tag - pre-created
 
