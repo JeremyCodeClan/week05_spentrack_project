@@ -29,11 +29,11 @@
                         <span>
                             {{ transaction.merchant.name }}
                         </span>
-                    {% elif transaction.id == id %}
+                    {% elif transaction.id == id and transaction.merchant == None %}
                         <span>
                             <label for="merchant_id">Merchant: </label>
                             <select name="merchant_id" id="merchant">
-                               
+                                <option id="merchant" value="None" selected>None</option>
                                 {% for merchant in merchants %}
                                 <option id="merchant" value="{{ merchant.id }}" {% if merchant.id == transaction.merchant.id %} selected {% endif %}>
                                     {{ merchant.name }}
@@ -52,11 +52,11 @@
                             {{ transaction.tag.name }}
                         </span>
                     
-                    {% elif transaction.id == id %}
+                    {% elif transaction.id == id and transaction.tag == None %}
                         <span>
                             <label for="tag">Tag: </label>
                             <select name="tag_id" id="tag">
-                            
+                                <option id="tag" value="None" selected>None</option>
                                 {% for tag in tags %}
                                 <option id="tag" value="{{ tag.id }}" {% if tag.id == transaction.tag.id %} selected {% endif %}>
                                     {{ tag.name }}
@@ -64,7 +64,6 @@
                                 {% endfor %}
                             </select>
                         </span>
-                          
                     {% else %}
                         <span>
                             None
