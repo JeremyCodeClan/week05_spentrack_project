@@ -19,3 +19,10 @@ def new():
         "tags/new.html", 
         tags = tags, login = 1, new_cancel = 1
         )
+
+@tags_blueprint.route("/jeremy_e51/tags", methods=['POST'])
+def add_tag():
+    name = request.form['name']
+    tag = Tag(name)
+    tag_repo.save(tag)
+    return redirect('/jeremy_e51/tags')
