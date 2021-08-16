@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2><b>Available balance:</b> £ {{ 1000 - total }}</h2>
+    <h3><b>Transactions total:</b> £ {{ total }}</h3>
+    {% if new_cancel != 1 %}
+        <a href="/jeremy_e51/new"><button>New</button></a>
+    {% endif %}
+    {% block transaction_new %}
+    {% endblock %}
+    {% for transaction in transactions %}
+        <div>
+            <hr>
+                <div>
+                    <span>{{ transaction.date }}</span>
+                    /
+                    <span>£ {{ transaction.amount }}</span>
+                </div>
+                <div>
+                    <a href="/jeremy_e51/{{ transaction.id }}">
+                    <span>{{ transaction.name }}</span>
+                    /
+                    <span>{{ transaction.description }}</span>
+                    </a>
+                </div>
+                <div>
+                    <form action="/jeremy_e51/{{ id }}" method="POST">
+                    {% if transaction.merchant != None %}
+                        <span>
+                            {{ transaction.merchant.name }}
+                        </span>
+                    {% elif transaction.id == id %}
+                        <span>
+                            <label for="merchant_id">Merchant: </label>
+                            <select name="merchant_id" id="merchant">
+                               
+                                {% for merchant in merchants %}
+                                <option id="merchant" value="{{ merchant.id }}" {% if merchant.id == transaction.merchant.id %} selected {% endif %}>
+                                    {{ merchant.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                    {% else %}
+                        <span>
+                            None
+                        </span>
+                    {% endif %}
+                    /
+                    {% if transaction.tag != None %}
+                        <span>
+                            {{ transaction.tag.name }}
+                        </span>
+                    
+                    {% elif transaction.id == id %}
+                        <span>
+                            <label for="tag">Tag: </label>
+                            <select name="tag_id" id="tag">
+                            
+                                {% for tag in tags %}
+                                <option id="tag" value="{{ tag.id }}" {% if tag.id == transaction.tag.id %} selected {% endif %}>
+                                    {{ tag.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                          
+                    {% else %}
+                        <span>
+                            None
+                        </span>
+                    {% endif %}
+                    
+                    {% if transaction.id == id %}
+                        <button>Confirm</button>
+                        <a href="/jeremy_e51" class="cancel-button">Cancel</a>
+                    {% endif %}
+                    </form>
+                </div>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock  %}
