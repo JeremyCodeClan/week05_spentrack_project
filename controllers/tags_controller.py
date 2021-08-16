@@ -11,3 +11,11 @@ tags_blueprint = Blueprint("tags", __name__)
 def tags():
     tags = tag_repo.select_all()
     return render_template("tags/index.html", tags = tags, login = 1)
+
+@tags_blueprint.route("/jeremy_e51/tags/new")
+def new():
+    tags = tag_repo.select_all()
+    return render_template(
+        "tags/new.html", 
+        tags = tags, login = 1, new_cancel = 1
+        )
