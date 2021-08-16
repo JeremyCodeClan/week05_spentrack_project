@@ -59,7 +59,7 @@ def update_transaction(id):
     if "merchant_id" in request.form:
         if request.form["merchant_id"] != "None":
             merchant_id = request.form["merchant_id"]
-            merchant = tag_repo.select(merchant_id)
+            merchant = merchant_repo.select(merchant_id)
             transaction.merchant = merchant
 
     transaction_repo.update(transaction)
