@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h2>Merchants</h2>
+    {% if new_cancel != 1 %}
+        <a href="/jeremy_e51/merchants/new"><button>New</button></a>
+    {% endif %}
+    {% block merchant_new %}
+    {% endblock %}
     {% for merchant in merchants %}
     <div>
         <hr>

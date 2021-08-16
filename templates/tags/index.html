@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h2>Tags</h2>
+    {% if new_cancel != 1 %}
+        <a href="/jeremy_e51/tags/new"><button>New</button></a>
+    {% endif %}
+    {% block tag_new %}
+    {% endblock %}
     {% for tag in tags %}
-        <div>
-            <hr>
-            <span>{{ tag.id }}</span>
-            /
-            <span>{{ tag.name }}</span>
-            <hr>
-        </div>
+    <div>
+        <hr>
+        <span>{{ tag.id }}</span>
+        /
+        <span>{{ tag.name }}</span>
+        <hr>
+    </div>
     {% endfor %}
 {% endblock  %}
