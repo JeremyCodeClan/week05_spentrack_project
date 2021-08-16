@@ -11,31 +11,42 @@
     {% for transaction in transactions %}
         <div>
             <hr>
-            <span>{{ transaction.date }}</span>
-            /
-            <a href="/jeremy_e51/{{ transaction.id }}">
-            <span>{{ transaction.name }}</span>
-            /
-            <span>{{ transaction.description }}</span>
-            </a>
-            /
-            <span>£ {{ transaction.amount }}</span>
-            /
-            <span>
-                {% if transaction.tag != None %}
-                    {{ transaction.tag.name }}
-                {% else %}
-                    None
-                {% endif %}
-            </span>
-            /
-            <span>
-                {% if transaction.merchant != None %}
-                    {{ transaction.merchant.name }}
-                {% else %}
-                    None
-                {% endif %}
-            </span>
+                <div>
+                    <span>{{ transaction.date }}</span>
+                    /
+                    <span>£ {{ transaction.amount }}</span>
+                </div>
+                <div>
+                    <a href="/jeremy_e51/{{ transaction.id }}">
+                    <span>{{ transaction.name }}</span>
+                    /
+                    <span>{{ transaction.description }}</span>
+                    </a>
+                </div>
+                <div>
+                    {% if transaction.merchant != None %}
+                        <span>
+                            {{ transaction.merchant.name }}
+                        </span>                    
+                    {% else %}
+                        <span>
+                            None
+                        </span>
+                    {% endif %}
+                    /
+                    {% if transaction.tag != None %}
+                        <span>
+                            {{ transaction.tag.name }}
+                        </span>    
+                    {% else %}
+                        <span>
+                            None
+                        </span>
+                    {% endif %}
+                    {% if transaction.merchant == None or transaction.tag == None %}
+                        <a href="/jeremy_e51/{{ transaction.id }}/edit"><button>Edit</button></a>    
+                    {% endif %}
+                </div>
             <hr>
         </div>
     {% endfor %}
