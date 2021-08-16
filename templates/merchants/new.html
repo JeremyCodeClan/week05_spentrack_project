@@ -1,0 +1,16 @@
+{% extends 'merchants/index.html' %}
+
+{% block merchant_new %}
+    <form action="/jeremy_e51/merchants" method="POST">
+        <hr>
+            <div class="input-margin">
+                <label for="name">Merchant Name :</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div>
+                <button>Add</button>
+                <a href="/jeremy_e51/merchants" class="cancel-button">Cancel</a>
+            </div>
+        <hr>
+    </form>
+{% endblock  %}

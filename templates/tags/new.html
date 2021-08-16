@@ -1,0 +1,16 @@
+{% extends 'tags/index.html' %}
+
+{% block tag_new %}
+    <form action="/jeremy_e51/tags" method="POST">
+        <hr>
+            <div class="input-margin">
+                <label for="name">Tag Name :</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div>
+                <button>Add</button>
+                <a href="/jeremy_e51/tags" class="cancel-button">Cancel</a>
+            </div>
+        <hr>
+    </form>
+{% endblock  %}
