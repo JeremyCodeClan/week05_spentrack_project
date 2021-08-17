@@ -129,3 +129,9 @@ def order_by_price_desc():
     sql = "SELECT * FROM transactions ORDER BY amount DESC"
     results = reuseable_select_all(sql)
     return results
+
+def order_by_price_asc():
+    sql = "SELECT * FROM transactions ORDER BY amount ASC"
+    results = reuseable_select_all(sql)
+    return results
+    
