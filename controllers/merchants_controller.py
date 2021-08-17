@@ -7,6 +7,7 @@ import repositories.tag_repository as tag_repo
 
 merchants_blueprint = Blueprint("merchants", __name__)
 
+
 @merchants_blueprint.route("/jeremy_e51/merchants")
 def merchants():
     merchants = merchant_repo.select_all()
@@ -26,3 +27,12 @@ def add_merchant():
     merchant = Merchant(name)
     merchant_repo.save(merchant)
     return redirect('/jeremy_e51/merchants')
+
+@merchants_blueprint.route("/jeremy_e51/merchants/<id>")
+def show_merchant(id):
+    merchants = merchant_repo.select_all()
+    found_transactions = transaction_repo.select_by_merchant(id)
+    return render_template(
+        "merchants/index.html",
+        merchants = merchants, found_transactions = found_transactions, login = 1, id = int(id)
+    )
