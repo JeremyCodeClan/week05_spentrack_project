@@ -1,39 +1,162 @@
-html {
+html, body {
     margin:0;
     padding:0;
     font-family: Arial, Helvetica, sans-serif;
+    color: rgb(26, 26, 26);
 }
 
-body {
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+main {
     margin:0 auto;
-    width: 75%;
+    max-width: 75%;
 }
 
-head {
+header {
+    position: fixed;
+    top: 0;
     height: 15vh;
+    width: 100%;
+    background: white;
 }
 
+.head-block {
+    height: 100%;
+    max-width: 75%;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.head-logo {
+    font-size: 2rem;
+    font-family: 'Oleo Script', cursive;
+}
+.head-logo:hover {
+    color: rgb(120, 120, 120);
+    cursor: pointer;
+}
+.head-list {
+    display: flex;
+    border: 1.5px solid rgb(196, 196, 196); 
+    padding: 0.75rem;
+    border-radius: 1.25rem;
+}
+.head-list > li {
+    font-family: 'Noto Sans SC', sans-serif;
+    padding: 0.4rem 0.8rem;
+    color: rgb(26, 26, 26);
+    border-radius: 0.75rem;
+}
+#username {
+    margin-right: 0.5rem;
+    color: whitesmoke;
+    background: rgb(87, 87, 87);
+}
+.head-list > li:hover {
+    color: rgb(63, 63, 63);
+}
+#username:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background: rgb(152, 152, 152);
+}
+main {
+    margin-top: 8rem;
+}
+.tabs-block {
+    margin-top: 1rem;
+}
 .tabs {
-    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.tabs > a {
+    font-family: 'Noto Sans SC', sans-serif;
+    padding: 0.75rem 1.5rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    color: whitesmoke;
+    text-shadow: black 1px 2px;
+}
+#tab-transaction {
+    background: rgb(93, 145, 85);
+}
+#tab-merchant {
+    background: rgb(85, 90, 145);
+}
+#tab-tag {
+    background: rgb(145, 85, 85);
+}
+#transactions-block {
+    color: whitesmoke;
+    text-shadow: black 1px 2px;
+    background: rgb(93, 145, 85);
+    padding: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+.transactions {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+.transaction {
+    height: 50px;
+    color: rgb(33, 33, 33);
+    text-shadow: none;
+    background: white;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+}
+#merchants-block {
+    color: whitesmoke;
+    background: rgb(85, 90, 145);
+    padding: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+#tags-block {
+    color: whitesmoke;
+    background: rgb(145, 85, 85);
+    padding: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
 
 footer {
+    margin-top: 1.5rem;
     height: 10vh;
-    margin-top: 3rem;
+    max-width: 100%;
 }
-
+.footer-block {
+    height: 100%;
+    max-width: 75%;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 a, ul, li, p, div {
     margin:0;
     padding:0;
+    display: inline-block;
     text-decoration: none;
     list-style: none;
     color: inherit;
 }
 
-a:hover, li:hover {
+/* a:hover, li:hover {
     color: darkslategrey;
     background:lightgoldenrodyellow;
-}
+} */
 
 button, .cancel-button {
     font-size: 1rem;
@@ -60,4 +183,12 @@ button:hover, .cancel-button:hover {
 
 .input-margin {
     margin: 0.5rem 0;
+}
+
+.transactions-by-merchant {
+    margin: 1rem;
+}
+
+.transactions-by-tag {
+    margin: 1rem;
 }

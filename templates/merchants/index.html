@@ -1,19 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <article id="merchants-block"> 
     <h2>Merchants</h2>
     {% if new_cancel != 1 %}
         <a href="/jeremy_e51/merchants/new"><button>New</button></a>
     {% endif %}
+
     {% block merchant_new %}
     {% endblock %}
+
     {% for merchant in merchants %}
-    <div>
-        <hr>
-        <span>{{ merchant.name }}</span>
-        /
-        <span>Total: £ {{ merchant.total }}</span>
-        <hr>
-    </div>
+        
+        {% if merchant.id == id %}
+        <div>
+            <hr>
+            <span><a href="/jeremy_e51/merchants/{{merchant.id}}">{{ merchant.name }}</a></span>
+            /
+            <span>Total: £ {{ merchant.total }}</span>
+            {% for transaction in found_transactions %}
+                <section class="transactions-by-merchant">
+                    <div>
+                        <span>{{ transaction.date }}</span>/
+                        <span>£ {{ transaction.amount }}</span>
+                    </div>
+                    <div>
+                        <a href="/jeremy_e51/{{ transaction.id }}">
+                        <span>{{ transaction.name }}</span>/
+                        <span>{{ transaction.description }}</span>
+                        </a>
+                    </div>
+                    <div>
+                        {% if transaction.tag != None %}
+                            <span>{{ transaction.tag.name }}</span>    
+                        {% else %}
+                            <span>None</span>
+                        {% endif %}
+                    </div>
+                </section>
+            {% endfor %}
+            <hr>
+        </div>
+        {% else %}
+        <div>
+            <hr>
+            <span><a href="/jeremy_e51/merchants/{{merchant.id}}">{{ merchant.name }}</a></span>
+            /
+            <span>Total: £ {{ merchant.total }}</span>
+            <hr>
+        </div>
+        {% endif %}
     {% endfor %}
+    </article>
 {% endblock  %}

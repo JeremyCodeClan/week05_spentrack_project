@@ -5,38 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lusitana&family=Oleo+Script&family=Vidaloka&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap" rel="stylesheet">
     <title>Spending Tracker</title>
 </head>
 <body>
     <header>
-        <div>
-            <h1><a href="/">SpenTrack</a></h1>
-        </div>
-        <nav>
-            <ul>
-                {% if login %}
-                    <li>jeremy_e51</li>
-                    <li><a href="/">Sign Out</a></li>
-                {% else %}
-                    <li><a href="/jeremy_e51">Sign In</a></li>
-                    <li><a href="/">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+        <section class="head-block">
+            <div class="head-logo">
+                <h1><a href="/">SpenTrack</a></h1>
+            </div>
+            <nav>
+                <ul class="head-list">
+                    {% if login %}
+                        <li id="username">jeremy_e51</li>
+                        <li><a href="/">Sign Out</a></li>
+                    {% else %}
+                        <li id="sign-in"><a href="/jeremy_e51">Sign In</a></li>
+                        <li><a href="/">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </section>
     </header>
     <main>
-        <section class="tabs">
-            <ul>
-                <li><a href="/jeremy_e51">Transactions</a></li>
-                <li><a href="/jeremy_e51/merchants">Merchants</a></li>
-                <li><a href="/jeremy_e51/tags">Tags</a></li>
+        <section class="tabs-block">
+            <ul class="tabs">
+                <a href="/jeremy_e51" id="tab-transaction"><li>Transactions</li></a>
+                <a href="/jeremy_e51/merchants" id="tab-merchant"><li>Merchants</li></a>
+                <a href="/jeremy_e51/tags" id="tab-tag"><li>Tags</li></a>
             </ul>
         </section>
         {% block content %}
-        {% endblock  %}
+        {% endblock %}
     </main>
     <footer>
-        <section>
+        <section class="footer-block">
             <div>
                 <div>SpenTrack ©</div>
                 <div>

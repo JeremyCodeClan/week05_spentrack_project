@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <article id="transactions-block">
     <h2><b>Available balance:</b> £ {{ 1000 - total }}</h2>
     <h3><b>Transactions total:</b> £ {{ total }}</h3>
     {% if new_cancel != 1 %}
@@ -8,46 +9,38 @@
     {% endif %}
     {% block transaction_new %}
     {% endblock %}
+    <div class="transactions">
     {% for transaction in transactions %}
-        <div>
-            <hr>
-                <div>
-                    <span>{{ transaction.date }}</span>
-                    /
-                    <span>£ {{ transaction.amount }}</span>
-                </div>
-                <div>
+                <div class="transaction">
+                    <h4>{{ transaction.date }}</h4>
+                    <p>£ {{ transaction.amount }}</p>
                     <a href="/jeremy_e51/{{ transaction.id }}">
-                    <span>{{ transaction.name }}</span>
-                    /
-                    <span>{{ transaction.description }}</span>
+                    <p>{{ transaction.name }}</p>
+                    <p>{{ transaction.description }}</p>
                     </a>
-                </div>
-                <div>
                     {% if transaction.merchant != None %}
-                        <span>
+                        <p>
                             {{ transaction.merchant.name }}
-                        </span>                    
+                        </p>                    
                     {% else %}
-                        <span>
+                        <p>
                             None
-                        </span>
+                        </p>
                     {% endif %}
-                    /
                     {% if transaction.tag != None %}
-                        <span>
+                        <p>
                             {{ transaction.tag.name }}
-                        </span>    
+                        </p>    
                     {% else %}
-                        <span>
+                        <p>
                             None
-                        </span>
+                        </p>
                     {% endif %}
                     {% if transaction.merchant == None or transaction.tag == None %}
                         <a href="/jeremy_e51/{{ transaction.id }}/edit"><button>Assign</button></a>    
                     {% endif %}
                 </div>
-            <hr>
-        </div>
     {% endfor %}
+    </div>
+    </article>
 {% endblock  %}

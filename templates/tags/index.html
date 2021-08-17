@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <article id="tags-block">
     <h2>Tags</h2>
     {% if new_cancel != 1 %}
         <a href="/jeremy_e51/tags/new"><button>New</button></a>
@@ -8,12 +9,42 @@
     {% block tag_new %}
     {% endblock %}
     {% for tag in tags %}
-    <div>
-        <hr>
-        <span>{{ tag.id }}</span>
-        /
-        <span>{{ tag.name }}</span>
-        <hr>
-    </div>
+        {% if tag.id == id %}
+        <div>
+            <hr>
+                <span><a href="/jeremy_e51/tags/{{tag.id}}">{{ tag.name }}</a></span>
+                <span>{{ tag.count }}</span>
+                {% for transaction in found_transactions %}
+                    <section class="transactions-by-tag">
+                        <div>
+                            <span>{{ transaction.date }}</span>/
+                            <span>£ {{ transaction.amount }}</span>
+                        </div>
+                        <div>
+                            <a href="/jeremy_e51/{{ transaction.id }}">
+                            <span>{{ transaction.name }}</span>/
+                            <span>{{ transaction.description }}</span>
+                            </a>
+                        </div>
+                        <div>
+                            {% if transaction.merchant != None %}
+                                <span>{{ transaction.merchant.name }}</span>    
+                            {% else %}
+                                <span>None</span>
+                            {% endif %}
+                        </div>
+                    </section>
+                {% endfor %}
+            <hr>
+        </div>
+        {% else %}
+        <div>
+            <hr>
+                <span><a href="/jeremy_e51/tags/{{tag.id}}">{{ tag.name }}</a></span>
+                <span>{{ tag.count }}</span>
+            <hr>
+        </div>
+        {% endif %}
     {% endfor %}
+    </article> 
 {% endblock  %}
