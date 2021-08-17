@@ -18,7 +18,7 @@ def new():
     return render_template(
         "tags/new.html", 
         tags = tags, login = 1, new_cancel = 1
-        )
+    )
 
 @tags_blueprint.route("/jeremy_e51/tags", methods=['POST'])
 def add_tag():
@@ -26,3 +26,12 @@ def add_tag():
     tag = Tag(name)
     tag_repo.save(tag)
     return redirect('/jeremy_e51/tags')
+
+@tags_blueprint.route("/jeremy_e51/tags/<id>")
+def show_tag(id):
+    tags = tag_repo.select_all()
+    found_transactions = transaction_repo.select_by_tag(id)
+    return render_template(
+        "tags/index.html", 
+        tags = tags, found_transactions = found_transactions, login = 1, id = int(id)
+    )
