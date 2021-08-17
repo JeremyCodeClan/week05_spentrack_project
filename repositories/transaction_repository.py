@@ -124,3 +124,8 @@ def select_by_tag(tag_id):
             )
         transactions.append(transaction)
     return transactions
+
+def order_by_price_desc():
+    sql = "SELECT * FROM transactions ORDER BY amount DESC"
+    results = reuseable_select_all(sql)
+    return results
