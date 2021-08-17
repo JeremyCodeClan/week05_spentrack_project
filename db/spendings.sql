@@ -10,7 +10,8 @@ CREATE TABLE merchants (
 
 CREATE TABLE tags (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255),
+    count INT NULL
 );
 
 CREATE TABLE transactions (
