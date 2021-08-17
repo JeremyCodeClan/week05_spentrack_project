@@ -1,3 +1,4 @@
+from models.merchant import Merchant
 from db.run_sql import run_sql
 from models.transaction import Transaction
 import repositories.merchant_repository as merchant_repo
@@ -7,7 +8,11 @@ def save(transaction):
     sql = "INSERT INTO transactions (name, description, amount, date, tag_id, merchant_id) VALUES (%s, %s, %s, %s, %s, %s) RETURNING *"
     tag_id = None
     merchant_id = None
-    if transaction.tag != None: tag_id = transaction.tag.id
+    if transaction.tag != None:
+        tag_id = transaction.tag.id
+        tag = tag_repo.select(tag_id)
+        tag.count += 1
+        tag_repo.update(tag)
     if transaction.merchant != None:
         merchant_id = transaction.merchant.id
         merchant = merchant_repo.select(merchant_id)
@@ -70,6 +75,9 @@ def update(transaction):
     if transaction.tag is not None:
         if type(transaction.tag) != int:
             tag_id = transaction.tag.id
+            tag = tag_repo.select(tag_id)
+            tag.count += 1
+            tag_repo.update(tag)
         else:
             tag_id = transaction.tag          
     values = [transaction.name, transaction.description, transaction.amount, transaction.date, tag_id, merchant_id, transaction.id]
@@ -80,3 +88,68 @@ def total_amount(transactions):
     for transaction in transactions:
         total += transaction.amount
     return total
+
+def select_by_merchant(merchant_id):
+    transactions = []
+    sql = "SELECT * FROM transactions WHERE merchant_id = %s"
+    values = [merchant_id]
+    results = run_sql(sql, values)
+    for row in results:
+        tag = None
+        if row['tag_id'] != None: tag = tag_repo.select(row['tag_id'])
+        transaction = Transaction(
+            row['name'], row['description'],
+            row['amount'], row['date'], tag,
+            None, row['id']
+            )
+        transactions.append(transaction)
+    return transactions
+
+def select_by_tag(tag_id):
+    transactions = []
+    sql = "SELECT * FROM transactions WHERE tag_id = %s"
+    values = [tag_id]
+    results = run_sql(sql, values)
+    for row in results:
+        merchant = None
+        if row['merchant_id'] != None: merchant = tag_repo.select(row['merchant_id'])
+        transaction = Transaction(
+            row['name'], row['description'],
+            row['amount'], row['date'], None,
+            merchant, row['id']
+            )
+        transactions.append(transaction)
+    return transactions
+
+# def order_by_price_desc():
+#     transactions = []
+#     sql = "SELECT * FROM transactions ORDER BY amount DESC"
+#     results = run_sql(sql)
+#     for row in results:
+#         tag = None
+#         merchant = None
+#         if row['tag_id'] != None: tag = tag_repo.select(row['tag_id'])
+#         if row['merchant_id'] != None: merchant = merchant_repo.select(row['merchant_id'])
+#         transaction = Transaction(
+#             row['name'], row['description'],
+#             row['amount'], row['date'], tag,
+#             merchant, row['id']
+#             )
+#         transactions.append(transaction)
+#     return transactions
+
+# def order_by_price_desc():
+#     transactions = []
+#     sql = "SELECT * FROM transactions ORDER BY amount DESC"
+#     results = run_sql(sql)
+#     for row in results:
+#         tag = None
+#         merchant = None
+#         if row['tag_id'] != None: tag = tag_repo.select(row['tag_id'])
+#         if row['merchant_id'] != None: merchant = merchant_repo.select(row['merchant_id'])
+#         transaction = Transaction(
+#             row['name'], row['description'],
+#             row['amount'], row['date'], tag,
+#             merchant, row['id']
+#             )
+#         transactions.append(transaction)
