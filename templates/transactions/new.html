@@ -2,34 +2,31 @@
 
 {% block transaction_new %}
     <form action="/jeremy_e51" method="POST">
-        <hr>
+        <section class="new-section">
             <section class="input-margin">
-                <div class="input-margin">
-                    <label for="name">Name :</label>
-                    <input type="text" name="name" id="name" required>
-                    <label for="amount">Amount: </label>
-                    <input type="number" name="amount" id="amount" required>
-                    <label for="date">Date: </label>
-                    <input type="date" name="date" id="date" required>
-                </div>
                 <div>
-                    <label for="description">Description: </label>
-                    <textarea id="description" name="description" cols="30" rows="2" required></textarea>
+                    <div class="new-input-flex">
+                        <label for="name">Name :</label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div class="new-input-flex">
+                        <label for="amount">Amount :</label>
+                        <input type="number" name="amount" id="amount" required>
+                    </div>
+                    <div class="new-input-flex">
+                        <label for="date">Date :</label>
+                        <input type="date" name="date" id="date" required>
+                    </div>
+                </div>
+                <div class="new-input-flex">
+                    <label for="description">Description :</label>
+                    <textarea id="description" name="description" cols="40" rows="5" required></textarea>
                 </div>
             </section>
-            <div>
-                <button>Add</button>
-                <a href="/jeremy_e51" class="cancel-button">Cancel</a>
+            <div class="new-btn-block">
+                <button class="add-btn">Add</button>
+                <a href="/jeremy_e51" class="new-cancel-button">Cancel</a>
             </div>
-        <hr>
+        </section>
     </form>
 {% endblock  %}
-
-<!-- 
-id SERIAL PRIMARY KEY,
-name VARCHAR(255),
-description TEXT,
-amount INT,
-date INT,
-tag_id INT NULL REFERENCES tags(id),
-merchant_id INT NULL REFERENCES merchants(id) -->
