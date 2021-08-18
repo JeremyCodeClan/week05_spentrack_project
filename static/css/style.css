@@ -5,14 +5,18 @@ html, body {
     color: rgb(26, 26, 26);
 }
 
+a {
+    display: inline-block;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
 
-main {
+.main-class {
     margin:0 auto;
-    max-width: 75%;
+    width: 768px;
 }
 
 header {
@@ -22,10 +26,10 @@ header {
     width: 100%;
     background: white;
 }
-
 .head-block {
     height: 100%;
     max-width: 75%;
+    min-width: 768px;
     margin:0 auto;
     display: flex;
     justify-content: space-between;
@@ -64,7 +68,24 @@ header {
     cursor: pointer;
     background: rgb(152, 152, 152);
 }
-main {
+.welcome-main {
+    margin: auto;
+    margin-top: 8rem;
+    min-width: 768px;
+    max-width: 75%;
+    height: 60vh;
+}
+.welcome-main > section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-main > section > h2 {
+    margin-top: 5rem;
+    font-size: 13rem;
+    color: rgb(192, 157, 210);
+}
+.main-class {
     margin-top: 8rem;
 }
 .tabs-block {
@@ -79,58 +100,412 @@ main {
     padding: 0.75rem 1.5rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    color: whitesmoke;
-    text-shadow: black 1px 2px;
+    color: rgb(84, 84, 84);
+    font-weight: bold;
 }
+
 #tab-transaction {
-    background: rgb(196, 238, 189);
+    background: rgb(216, 249, 210);
+}
+#tab-transaction:hover {
+    background: rgb(190, 230, 183);
 }
 #tab-merchant {
-    background: rgb(175, 180, 237);
+    background: rgb(207, 211, 252);
+}
+#tab-merchant:hover {
+    background: rgb(174, 180, 238);
 }
 #tab-tag {
-    background: rgb(250, 190, 190);
+    background: rgb(255, 215, 215);
 }
-#transactions-block {
+#tab-tag:hover {
+    background: rgb(244, 187, 187);
+}
+.transaction-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.transaction-tabs {
+    display: flex;
+    align-items: flex-end;
+
+}
+#order_date, #order_amount {
+    width: 40px;
+}
+#order_date, #order_amount, #order_name {
+    border-radius: 0.5rem;
+}
+#order_date > option {
+    color: rgb(48, 48, 48);
+}
+.tab-date, .tab-amount, .tab-name-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60px;
+    box-sizing: border-box;
+    padding: 0.5rem 0.75rem;
     color: whitesmoke;
-    text-shadow: black 1px 2px;
-    background: rgb(196, 238, 189);
-    padding: 1rem;
+}
+.tab-date {
+    width: 108px;    
+    background:rgb(167, 167, 167);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+.tab-amount {
+    width: 108px;
+    background:rgb(142, 142, 142);
+}
+.tab-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 165px;
+    background:rgb(167, 167, 167);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+.tab-button {
+    width: 50px;
+}
+.tab-title {
+    font-size: 1.25rem;
+    width: 90px;
+}
+.tab-name-block {
+    width: 90px;
+}
+.tab-order {
+    font-size: 0.9rem;
+    font-style: italic;
+    width: 90px;
+    display: flex;
+    justify-content: space-between;
+}
+.order-submit {
+    float: right;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.25rem;
+    background:rgb(77, 77, 77);
+    margin: 0.45rem;
+}
+.order-submit:hover {
+    background:rgb(116, 116, 116);
+}
+.balence-header-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    background: whitesmoke;
+    border: 2px solid rgb(157, 157, 157);
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+}
+.balence-header {
+    display: inline-block;
+}
+.merchants-head, .tags-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.merchant-items, .tag-items {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.merchant-title, .tag-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+.merchant-price, .tag-count {
+    font-size: 1rem;
+    color: rgb(220, 220, 220);
+}
+.merchant-new-form, .tag-new-form {
+    background: white;
+    padding: 2rem 3rem;
+    margin: 0.5rem;
+    margin-bottom: 1.25rem;
+    border-radius: 1rem;
+}
+.merchant-new-btns, .tag-new-btns {
+    display: flex;
+    justify-content: flex-end;
+}
+.merchant-new, .tag-new {
+    margin: 0.5rem 0 1rem;
+}
+.merchant-new > a, .tag-new > a {
+    float: right;
+}
+.merchant-cancel-btn, .tag-cancel-btn {
+    border-radius: 0.5rem;
+    background: rgb(136, 136, 136);
+    color: white;
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+}
+.merchant-cancel-btn:hover, .tag-cancel-btn:hover {
+    background: rgb(169, 169, 169);
+}
+.merchant-new-btn, .tag-new-btn {
+    border-radius: 0.75rem;
+    background: rgb(80, 179, 123);
+    font-size: 1.25rem;
+    padding: 0.5rem 1.25rem;
+    margin-right: 0.5rem;
+}
+.merchant-new-btn:hover, .tag-new-btn:hover {
+    background: rgb(119, 198, 153);
+}
+.merchant-show-container, .tag-show-container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border: 2px solid rgb(157, 157, 157);
+}
+.merchant-show-container {
+    background: mediumorchid;
+}
+.tag-show-container {
+    background: rgb(211, 110, 85);
+}
+
+.merchant-container, .tag-container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 2px solid rgb(157, 157, 157);
+}
+.merchant-container {
+    background: mediumorchid;
+}
+.merchant-container:hover {
+    background: rgb(202, 121, 222);
+}
+.tag-container {
+    background: rgb(211, 110, 85);
+}
+.tag-container:hover {
+    background: rgb(222, 142, 122);
+}
+#transactions-block,
+#merchants-block,
+#tags-block {
+    display: flex;
+    flex-direction: column;
+    color: rgb(63, 63, 63);
+    padding: 1rem 1.5rem 1.5rem;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 }
+#transactions-block {
+    background: rgb(216, 249, 210);
+}
+#merchants-block {
+    background: rgb(207, 211, 252);
+}
+#tags-block {
+    background: rgb(255, 215, 215);
+}
 .transactions {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
 }
 .transaction {
-    height: 50px;
-    color: rgb(33, 33, 33);
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    height: 35px;
+    color: rgb(62, 62, 62);
     text-shadow: none;
     background: white;
+    border: 2px solid rgb(157, 157, 157);
     margin: 0.5rem 0;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
 }
-#merchants-block {
+.new-block {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.transaction-date {
+    width: 100px;
+}
+.transaction-amount {
+    width: 100px;
+}
+.transaction-name {
+    width: 175px;
+}
+.transaction-name:hover {
+    color: grey;
+}
+.mer-tag-btn {
+    width: 200px;
+}
+.assign-btns {
+    width: 100px;
+}
+.merchant-btn {
+    background: mediumorchid;
     color: whitesmoke;
-    background: rgb(175, 180, 237);
-    padding: 1rem;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-radius: 0.5rem;
 }
-#tags-block {
+.merchant-select, .tag-select {
+    width: 70px;
+    height: 26px;
+    border-radius: 0.5rem;
+    background: rgb(233, 233, 233);
+    color: rgb(41, 41, 41);
+}   
+.merchant-btn:hover {
+    background: rgb(226, 160, 242);
+}
+.new-btn {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: rgb(152, 223, 137);
     color: whitesmoke;
-    background: rgb(250, 190, 190);
-    padding: 1rem;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-radius: 0.5rem;
 }
-
+.new-message {
+    color: rgb(110, 201, 92);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+.show-content {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+.show-description {
+    width: 325px;
+    font-size: 1.25rem;
+}
+.show-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+}
+.add-btn {
+    margin-right: 0.5rem;
+    background: rgb(20, 181, 106);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+}
+.show-merchant {
+    background: mediumorchid;
+}
+.show-merchant:hover {
+    background: mediumorchid;
+}
+.show-tag {
+    background: rgb(211, 110, 85);
+}
+.show-tag:hover {
+    background: rgb(211, 110, 85);
+}
+.add-btn:hover {
+    background: rgb(72, 220, 151);
+}
+.show-none {
+    background: rgb(79, 79, 79);
+}
+.show-none:hover {
+    background: rgb(79, 79, 79);
+}
+.new-cancel-button, .new-delete-button {
+    color: whitesmoke;
+    background: rgb(79, 79, 79);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.0rem;
+}
+.new-delete-button {
+    background: rgb(211, 78, 78);
+    margin-right: 0.5rem;
+}
+.new-delete-button:hover {
+    background: rgb(221, 133, 133);
+}
+.new-cancel-button {
+    background: rgb(79, 79, 79);
+}
+.new-btn:hover {
+    background: rgb(126, 196, 111);
+}
+.tag-btn {
+    background: rgb(211, 110, 85);
+    color: whitesmoke;
+    border-radius: 0.5rem;
+}
+.tag-btn:hover {
+    background: rgb(238, 176, 160);
+}
+.assign-btn-block {
+    width: 100px;
+}
+.confirm-btn, .cancel-btn {
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+}
+.confirm-btn {
+    margin-bottom: 0.1rem;
+    background: rgb(56, 193, 122);
+    float: right;
+}
+.confirm-btn:hover {
+    background: rgb(102, 210, 154);
+}
+.cancel-btn {
+    background:rgb(77, 77, 77);
+}
+.cancel-btn:hover {
+    background:rgb(121, 121, 121);
+}
+.cancel-atag {
+    float: right;
+}
+.assigned-btn {
+    float: right;
+}
+.assign-btn {
+    float: right;
+}
+.assign-btn > button {
+    background: rgb(85, 95, 211);
+    color: whitesmoke;
+    border-radius: 0.5rem;
+}
+.assign-btn > button:hover {
+    background: rgb(139, 147, 238);
+}
+.none-btn, .assigned-btn {
+    background: rgb(104, 104, 104);
+    color: whitesmoke;
+    border-radius: 0.5rem;
+}
+.none-btn:hover, .assigned-btn:hover {
+    cursor: pointer;
+    background: rgb(104, 104, 104);
+}
 footer {
     margin-top: 1.5rem;
     height: 10vh;
@@ -153,11 +528,6 @@ a, ul, li, p, div {
     color: inherit;
 }
 
-/* a:hover, li:hover {
-    color: darkslategrey;
-    background:lightgoldenrodyellow;
-} */
-
 button, .cancel-button {
     font-size: 1rem;
     border-radius: 3px;
@@ -176,13 +546,84 @@ button:hover, .cancel-button:hover {
     background: lightseagreen;
     color: white;
 }
-
+.new-input-flex {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+.new-input-flex > label {
+    margin-bottom: 0.25rem;
+    color: rgb(162, 162, 162);
+}
+.new-input-flex > input {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+.new-btn-block {
+    margin: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.new-input-flex > textarea {
+    margin-top: 0.25rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    padding: 1rem;
+    border: 2px solid rgb(103, 103, 103);
+}
+.new-cancel-button:hover {
+    background: rgb(121, 121, 121);
+}
 .cancel-button:hover {
     background: rgb(226, 42, 42);
 }
-
-.input-margin {
+.new-section {
+    background: rgb(250, 250, 250);
+    padding: 1rem 2rem;
+    margin: 1.25rem 0;
+    border-radius: 1rem;
+}
+.merchant-transactions, .tag-transactions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.merchant-transaction, .tag-transaction {
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    height: 35px;
+    color: rgb(62, 62, 62);
+    text-shadow: none;
+    background: white;
+    border: 2px solid grey;
     margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+}
+.show-section {
+    background: rgb(250, 250, 250);
+    padding: 0.5rem 1rem;
+    margin: 1.25rem 0;
+    border-radius: 1rem;
+}
+.input-margin {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+.input-margin > label {
+    color: rgb(109, 109, 109);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+.input-margin > input {
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    padding: 0.25rem 1rem;
+}
+.show-margin {
+    justify-content: space-between;
 }
 
 .transactions-by-merchant {
