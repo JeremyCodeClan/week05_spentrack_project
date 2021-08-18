@@ -9,11 +9,12 @@ transactions_blueprint = Blueprint("transactions", __name__)
 
 @transactions_blueprint.route("/jeremy_e51")
 def transactions():
+    order = 'order_date_desc'
     transactions = transaction_repo.select_all()
     total = transaction_repo.total_amount(transactions)
     return render_template(
         "transactions/index.html", 
-        transactions = transactions, total = total, login = 1
+        transactions = transactions, total = total, login = 1, order = order
         )
 
 @transactions_blueprint.route("/jeremy_e51/new")
@@ -23,6 +24,21 @@ def new():
     return render_template(
         "transactions/new.html", 
         transactions = transactions, total = total, login = 1, new_cancel = 1
+        )
+
+@transactions_blueprint.route("/jeremy_e51/<id>")
+def transaction_show(id):
+    order = 'order_date_desc'
+    show_one = transaction_repo.select(id)
+    merchant = None
+    tag = None
+    if show_one.merchant: merchant = merchant_repo.select(show_one.merchant)
+    if show_one.tag: tag = tag_repo.select(show_one.tag)
+    transactions = transaction_repo.select_all()
+    total = transaction_repo.total_amount(transactions)
+    return render_template(
+        "transactions/show.html", 
+        transactions = transactions, show_one = show_one, merchant = merchant, tag = tag, total = total, login = 1, order = order
         )
 
 @transactions_blueprint.route("/jeremy_e51", methods=['POST'])
@@ -63,4 +79,62 @@ def update_transaction(id):
             transaction.merchant = merchant
 
     transaction_repo.update(transaction)
+    return redirect('/jeremy_e51')
+
+@transactions_blueprint.route("/jeremy_e51/order")
+def transactions_by_order():
+    order_date = request.args['order_date']
+    order_amount = request.args['order_amount']
+    order_name = request.args['order_name']
+    if order_date:
+        if order_date == 'desc':
+            order = 'order_date_desc'
+            transactions = transaction_repo.select_all()
+            total = transaction_repo.total_amount(transactions)
+            return render_template(
+                "transactions/index.html", 
+                transactions = transactions, total = total, login = 1, order = order
+            )
+        if order_date == 'asc':
+            order = 'order_date_asc'
+            transactions = transaction_repo.select_all_asc()
+            total = transaction_repo.total_amount(transactions)
+            return render_template(
+                "transactions/index.html", 
+                transactions = transactions, total = total, login = 1, order = order
+            )
+    if order_amount:
+        if order_amount == 'desc':
+            order = 'order_amount_desc'
+            transactions = transaction_repo.order_by_price_desc()
+            total = transaction_repo.total_amount(transactions)
+            return render_template(
+                "transactions/index.html", 
+                transactions = transactions, total = total, login = 1, order = order
+            )
+        if order_amount == 'asc':
+            order = 'order_amount_asc'
+            transactions = transaction_repo.order_by_price_asc()
+            total = transaction_repo.total_amount(transactions)
+            return render_template(
+                "transactions/index.html", 
+                transactions = transactions, total = total, login = 1, order = order
+            )
+    if order_name:
+        if order_name == 'desc':
+            order = 'order_name_desc'
+            transactions = transaction_repo.order_by_name_desc()
+            total = transaction_repo.total_amount(transactions)
+            return render_template(
+                "transactions/index.html", 
+                transactions = transactions, total = total, login = 1, order = order
+            )
+        if order_name == 'asc':
+            order = 'order_name_asc'
+            transactions = transaction_repo.order_by_name_asc()
+            total = transaction_repo.total_amount(transactions)
+            return render_template(
+                "transactions/index.html", 
+                transactions = transactions, total = total, login = 1, order = order
+            )
     return redirect('/jeremy_e51')
