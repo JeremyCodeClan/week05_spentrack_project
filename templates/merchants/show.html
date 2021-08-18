@@ -1,0 +1,34 @@
+{% extends 'merchants/index.html' %}
+
+{% block merchant_show %}
+<section class="show-section">
+    <section class="show-margin">
+        <div class="merchant-show-container">
+            <div class="merchant-title"><a href="/jeremy_e51/merchants/{{one_merchant.id}}">{{ one_merchant.name }}</a></div>
+            <div class="merchant-price">Total: £ {{ one_merchant.total }}</div>
+        </div>
+        <section class="merchant-transactions">
+        {% for transaction in found_transactions %}
+        <div class="merchant-transaction">
+                <div class="transaction-date">{{ transaction.date }}</div>
+                <div class="transaction-amount">£ {{ transaction.amount }}</div>
+                <div class="transaction-name"><a href="/jeremy_e51/{{ transaction.id }}">{{ transaction.name }}</a></div>
+            <div class="mer-tag-btn">
+                {% if transaction.tag != None %}
+                <button class="tag-btn">{{ transaction.tag.name }}</button>    
+                {% else %}
+                <button class="none-btn">None</button>
+            {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        </section>
+    </section>
+    <div class="new-btn-block">
+        <form action="/jeremy_e51/merchants/{{one_merchant.id}}/delete" method="POST">
+            <button class="new-delete-button" type="submit">Delete</button>
+        </form>
+        <a href="/jeremy_e51/merchants" class="new-cancel-button">Close</a>
+    </div>
+</section>
+{% endblock  %}
