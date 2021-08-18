@@ -1,82 +1,135 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2><b>Available balance:</b> £ {{ 1000 - total }}</h2>
-    <h3><b>Transactions total:</b> £ {{ total }}</h3>
-    {% if new_cancel != 1 %}
-        <a href="/jeremy_e51/new"><button>New</button></a>
-    {% endif %}
-    {% block transaction_new %}
-    {% endblock %}
-    {% for transaction in transactions %}
-        <div>
-            <hr>
-                <div>
-                    <span>{{ transaction.date }}</span>
-                    /
-                    <span>£ {{ transaction.amount }}</span>
+<main class="main-class">
+    <section class="tabs-block">
+        <ul class="tabs">
+            <a href="/jeremy_e51" id="tab-transaction"><li>Transactions</li></a>
+            <a href="/jeremy_e51/merchants" id="tab-merchant"><li>Merchants</li></a>
+            <a href="/jeremy_e51/tags" id="tab-tag"><li>Tags</li></a>
+        </ul>
+    </section>
+    <article id="transactions-block">
+        <section class="transaction-header">
+                <form class="transaction-tabs" action="/jeremy_e51/order">
+                <div class="tab-date">
+                    <div class="tab-title">Date</div>
+                    <div class="tab-order">Order
+                        <select name="order_date" id="order_date">
+                            <option
+                                {% if order == Null %} selected {% endif %}
+                            ></option>
+                            <option value="desc"
+                                {% if order == 'order_date_desc' %} selected {% endif %}
+                            >▼</option>
+                            <option value="asc"
+                                {% if order == 'order_date_asc' %} selected {% endif %}
+                            >▲</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <a href="/jeremy_e51/{{ transaction.id }}">
-                    <span>{{ transaction.name }}</span>
-                    /
-                    <span>{{ transaction.description }}</span>
-                    </a>
+                <div class="tab-amount">
+                    <div class="tab-title">Amount</div>
+                    <div class="tab-order">Order
+                        <select name="order_amount" id="order_amount">
+                            <option
+                                {% if order == Null %} selected {% endif %}
+                            ></option>
+                            <option value="desc"
+                                {% if order == 'order_amount_desc' %} selected {% endif %}
+                            >▼</option>
+                            <option value="asc"
+                                {% if order == 'order_amount_asc' %} selected {% endif %}
+                            >▲</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
+                <div class="tab-name">
+                    <div class="tab-name-block">
+                        <div class="tab-title">Name</div>
+                        <div class="tab-order">Order
+                            <select name="order_name" id="order_name">
+                                <option selected></option>
+                                <option value="asc"
+                                    {% if order == 'order_name_asc' %} selected {% endif %}
+                                >A-Z</option>
+                                <option value="desc"
+                                    {% if order == 'order_name_desc' %} selected {% endif %}
+                                >Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tab-button">
+                        <button class="order-submit">Submit</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="balence-header-block">
+                <h2 class="balence-header"><b>Available balance:</b> £ {{ 1000 - total }}</h2>
+                <h3 class="balence-header"><b>Transactions total:</b> £ {{ total }}</h3>
+            </div>
+        </section>
+        <section class="transactions-main">
+            <section class="transactions">
+            {% for transaction in transactions %}
+                <div class="transaction">
+                    <div>
+                        <div class="transaction-date">{{ transaction.date }}</div>
+                        <div class="transaction-amount">£ {{ transaction.amount }}</div>
+                        <div class="transaction-name"><a href="/jeremy_e51/{{ transaction.id }}">{{ transaction.name }}</a></div>
+                    </div>
+                    <div class="mer-tag-btn">
                     <form action="/jeremy_e51/{{ id }}" method="POST">
-                    {% if transaction.merchant != None %}
-                        <span>
-                            {{ transaction.merchant.name }}
-                        </span>
-                    {% elif transaction.id == id and transaction.merchant == None %}
-                        <span>
-                            <label for="merchant_id">Merchant: </label>
-                            <select name="merchant_id" id="merchant">
-                                <option id="merchant" value="None" selected>None</option>
-                                {% for merchant in merchants %}
-                                <option id="merchant" value="{{ merchant.id }}" {% if merchant.id == transaction.merchant.id %} selected {% endif %}>
-                                    {{ merchant.name }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </span>
-                    {% else %}
-                        <span>
-                            None
-                        </span>
+                        {% if transaction.merchant != None %}
+                        <button class="merchant-btn">{{ transaction.merchant.name }}</button>                    
+                        {% elif transaction.id == id and transaction.merchant == None %}
+                        <select name="merchant_id" id="merchant" class="merchant-select">
+                            <option id="merchant" value="None" selected>None</option>
+                            {% for merchant in merchants %}
+                            <option id="merchant" value="{{ merchant.id }}" {% if merchant.id == transaction.merchant.id %} selected {% endif %}>
+                                {{ merchant.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        {% else %}
+                        <button class="none-btn">None</button>
+                        {% endif %}
+                        {% if transaction.tag != None %}
+                        <button class="tag-btn">{{ transaction.tag.name }}</button>    
+                        {% elif transaction.id == id and transaction.tag == None %}
+                        <select name="tag_id" id="tag" class="tag-select">
+                            <option id="tag" value="None" selected>None</option>
+                            {% for tag in tags %}
+                            <option id="tag" value="{{ tag.id }}" {% if tag.id == transaction.tag.id %} selected {% endif %}>
+                                {{ tag.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        {% else %}
+                        <button class="none-btn">None</button>
                     {% endif %}
-                    /
-                    {% if transaction.tag != None %}
-                        <span>
-                            {{ transaction.tag.name }}
-                        </span>
-                    
-                    {% elif transaction.id == id and transaction.tag == None %}
-                        <span>
-                            <label for="tag">Tag: </label>
-                            <select name="tag_id" id="tag">
-                                <option id="tag" value="None" selected>None</option>
-                                {% for tag in tags %}
-                                <option id="tag" value="{{ tag.id }}" {% if tag.id == transaction.tag.id %} selected {% endif %}>
-                                    {{ tag.name }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </span>
-                    {% else %}
-                        <span>
-                            None
-                        </span>
-                    {% endif %}
-                    
-                    {% if transaction.id == id %}
-                        <button>Confirm</button>
-                        <a href="/jeremy_e51" class="cancel-button">Cancel</a>
-                    {% endif %}
+                    </div>
+                    <div class="assign-btn-block">
+                        {% if transaction.id == id %}
+                            {% if transaction.merchant == None or transaction.tag == None %}
+                            <button class="confirm-btn" type="submit">Confirm</button>
+                            <a class="cancel-atag" href="/jeremy_e51"><button class="cancel-btn">Cancel</button></a>
+                            {% endif %}
+                        {% elif transaction.id != id %}
+                            {% if transaction.merchant == None or transaction.tag == None %}
+                            <a class="assign-btn" href="/jeremy_e51/{{ transaction.id }}/edit"><button>Assign</button></a>
+                            {% endif %}
+                        {% endif %}
+                        {% if transaction.merchant != None and transaction.tag != None %}
+                            <button class="assigned-btn">Assigned</button>
+                        {% endif %}
+                    </div>
                     </form>
                 </div>
-            <hr>
-        </div>
-    {% endfor %}
+            {% endfor %}
+            </section>
+        </section>
+    </article>
+<main>
 {% endblock  %}
