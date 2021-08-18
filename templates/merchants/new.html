@@ -1,16 +1,16 @@
 {% extends 'merchants/index.html' %}
 
 {% block merchant_new %}
+    <section class="merchant-new-form">
     <form action="/jeremy_e51/merchants" method="POST">
-        <hr>
-            <div class="input-margin">
-                <label for="name">Merchant Name :</label>
-                <input type="text" name="name" id="name" required>
-            </div>
-            <div>
-                <button>Add</button>
-                <a href="/jeremy_e51/merchants" class="cancel-button">Cancel</a>
-            </div>
-        <hr>
+        <div class="input-margin">
+            <label for="name">Merchant Name :</label>
+            <input type="text" name="name" id="name" required autofocus>
+        </div>
+        <div class="merchant-new-btns">
+            <button class="merchant-new-btn">Add</button>
+            <a href="/jeremy_e51/merchants" class="merchant-cancel-btn">Cancel</a>
+        </div>
     </form>
+    </section>
 {% endblock  %}
