@@ -1,0 +1,43 @@
+{% extends 'transactions/index.html' %}
+
+{% block transaction_show %}
+    <section class="new-section">
+        <section class="input-margin">
+            <div>
+                <div class="new-input-flex">
+                    <label for="name">Name :</label>
+                    <div class="show-content">{{ show_one.name }}</div>
+                </div>
+                <div class="new-input-flex">
+                    <label for="amount">Amount :</label>
+                    <div class="show-content">£ {{ show_one.amount }}</div>
+                </div>
+                <div class="new-input-flex">
+                    <label for="date">Date :</label>
+                    <div class="show-content">{{ show_one.date }}</div>
+                </div>
+            </div>
+            <div class="new-input-flex">
+                <label for="description">Description :</label>
+                <div class="show-description">{{ show_one.description }}</div>
+            </div>
+            <div class="new-input-flex">
+                <label for="description">Merchant :</label>
+                {% if merchant.name %}
+                    <button class="show-btn show-merchant">{{ merchant.name }}</button>
+                {% else %}
+                    <button class="show-btn show-none">None</button>
+                {% endif %}
+                <label for="description">Tag :</label>
+                {% if tag.name %}
+                    <button class="show-btn show-tag">{{ tag.name }}</button>
+                {% else %}
+                    <button class="show-btn show-none">None</button>
+                {% endif %}
+            </div>
+        </section>
+        <div class="new-btn-block">
+            <a href="/jeremy_e51" class="new-cancel-button">Go Back</a>
+        </div>
+    </section>
+{% endblock  %}
