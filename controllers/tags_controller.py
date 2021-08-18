@@ -29,9 +29,19 @@ def add_tag():
 
 @tags_blueprint.route("/jeremy_e51/tags/<id>")
 def show_tag(id):
+    one_tag = tag_repo.select(id)
     tags = tag_repo.select_all()
     found_transactions = transaction_repo.select_by_tag(id)
     return render_template(
-        "tags/index.html", 
-        tags = tags, found_transactions = found_transactions, login = 1, id = int(id)
+        "tags/show.html", 
+        one_tag = one_tag, tags = tags, found_transactions = found_transactions, login = 1, id = int(id)
     )
+
+@tags_blueprint.route("/jeremy_e51/tags/<id>/delete", methods=["POST"])
+def delete_tag(id):
+    found_transactions = transaction_repo.select_by_tag(id)
+    for transaction in found_transactions:
+        transaction.tag = None
+        transaction_repo.update(transaction)
+    tag_repo.delete(id)
+    return redirect("/jeremy_e51/tags")
