@@ -1,55 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <article id="merchants-block"> 
-    <h2>Merchants</h2>
-    {% if new_cancel != 1 %}
-        <a href="/jeremy_e51/merchants/new"><button>New</button></a>
-    {% endif %}
-
-    {% block merchant_new %}
-    {% endblock %}
-
-    {% for merchant in merchants %}
-        
-        {% if merchant.id == id %}
-        <div>
-            <hr>
-            <span><a href="/jeremy_e51/merchants/{{merchant.id}}">{{ merchant.name }}</a></span>
-            /
-            <span>Total: £ {{ merchant.total }}</span>
-            {% for transaction in found_transactions %}
-                <section class="transactions-by-merchant">
-                    <div>
-                        <span>{{ transaction.date }}</span>/
-                        <span>£ {{ transaction.amount }}</span>
-                    </div>
-                    <div>
-                        <a href="/jeremy_e51/{{ transaction.id }}">
-                        <span>{{ transaction.name }}</span>/
-                        <span>{{ transaction.description }}</span>
-                        </a>
-                    </div>
-                    <div>
-                        {% if transaction.tag != None %}
-                            <span>{{ transaction.tag.name }}</span>    
-                        {% else %}
-                            <span>None</span>
-                        {% endif %}
-                    </div>
-                </section>
-            {% endfor %}
-            <hr>
-        </div>
-        {% else %}
-        <div>
-            <hr>
-            <span><a href="/jeremy_e51/merchants/{{merchant.id}}">{{ merchant.name }}</a></span>
-            /
-            <span>Total: £ {{ merchant.total }}</span>
-            <hr>
-        </div>
-        {% endif %}
-    {% endfor %}
+<main class="main-class">
+    <section class="tabs-block">
+        <ul class="tabs">
+            <a href="/jeremy_e51" id="tab-transaction"><li>Transactions</li></a>
+            <a href="/jeremy_e51/merchants" id="tab-merchant"><li>Merchants</li></a>
+            <a href="/jeremy_e51/tags" id="tab-tag"><li>Tags</li></a>
+        </ul>
+    </section>
+    <article id="merchants-block">
+        <section class="merchants-head">
+            {% if new_cancel != 1 %}
+            <div class="merchant-new">
+                <a href="/jeremy_e51/merchants/new"><button class="merchant-new-btn">New</button></a>
+            </div>
+            {% endif %}
+            {% block merchant_new %}
+            {% endblock %}
+        </section>
+        {% block merchant_show %}
+        {% endblock %}
+        <section class="merchant-items">
+        {% for merchant in merchants %}
+        <a href="/jeremy_e51/merchants/{{merchant.id}}">
+            <div class="merchant-container">
+                <div class="merchant-title">{{ merchant.name }}</div>
+                <div class="merchant-price">Total: £ {{ merchant.total }}</div>
+            </div>
+        </a>
+        {% endfor %}
+        </section>
     </article>
-{% endblock  %}
+<main>
+{% endblock %}
