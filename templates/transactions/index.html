@@ -1,46 +1,117 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<main class="main-class">
+    <section class="tabs-block">
+        <ul class="tabs">
+            <a href="/jeremy_e51" id="tab-transaction"><li>Transactions</li></a>
+            <a href="/jeremy_e51/merchants" id="tab-merchant"><li>Merchants</li></a>
+            <a href="/jeremy_e51/tags" id="tab-tag"><li>Tags</li></a>
+        </ul>
+    </section>
     <article id="transactions-block">
-    <h2><b>Available balance:</b> £ {{ 1000 - total }}</h2>
-    <h3><b>Transactions total:</b> £ {{ total }}</h3>
-    {% if new_cancel != 1 %}
-        <a href="/jeremy_e51/new"><button>New</button></a>
-    {% endif %}
-    {% block transaction_new %}
-    {% endblock %}
-    <div class="transactions">
-    {% for transaction in transactions %}
-                <div class="transaction">
-                    <h4>{{ transaction.date }}</h4>
-                    <p>£ {{ transaction.amount }}</p>
-                    <a href="/jeremy_e51/{{ transaction.id }}">
-                    <p>{{ transaction.name }}</p>
-                    <p>{{ transaction.description }}</p>
-                    </a>
-                    {% if transaction.merchant != None %}
-                        <p>
-                            {{ transaction.merchant.name }}
-                        </p>                    
-                    {% else %}
-                        <p>
-                            None
-                        </p>
-                    {% endif %}
-                    {% if transaction.tag != None %}
-                        <p>
-                            {{ transaction.tag.name }}
-                        </p>    
-                    {% else %}
-                        <p>
-                            None
-                        </p>
-                    {% endif %}
-                    {% if transaction.merchant == None or transaction.tag == None %}
-                        <a href="/jeremy_e51/{{ transaction.id }}/edit"><button>Assign</button></a>    
-                    {% endif %}
+        <section class="transaction-header">
+                <form class="transaction-tabs" action="/jeremy_e51/order">
+                <div class="tab-date">
+                    <div class="tab-title">Date</div>
+                    <div class="tab-order">Order
+                        <select name="order_date" id="order_date">
+                            <option
+                                {% if order == Null %} selected {% endif %}
+                            ></option>
+                            <option value="desc"
+                                {% if order == 'order_date_desc' %} selected {% endif %}
+                            >▼</option>
+                            <option value="asc"
+                                {% if order == 'order_date_asc' %} selected {% endif %}
+                            >▲</option>
+                        </select>
+                    </div>
                 </div>
-    {% endfor %}
-    </div>
+                <div class="tab-amount">
+                    <div class="tab-title">Amount</div>
+                    <div class="tab-order">Order
+                        <select name="order_amount" id="order_amount">
+                            <option
+                                {% if order == Null %} selected {% endif %}
+                            ></option>
+                            <option value="desc"
+                                {% if order == 'order_amount_desc' %} selected {% endif %}
+                            >▼</option>
+                            <option value="asc"
+                                {% if order == 'order_amount_asc' %} selected {% endif %}
+                            >▲</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="tab-name">
+                    <div class="tab-name-block">
+                        <div class="tab-title">Name</div>
+                        <div class="tab-order">Order
+                            <select name="order_name" id="order_name">
+                                <option selected></option>
+                                <option value="asc"
+                                    {% if order == 'order_name_asc' %} selected {% endif %}
+                                >A-Z</option>
+                                <option value="desc"
+                                    {% if order == 'order_name_desc' %} selected {% endif %}
+                                >Z-A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tab-button">
+                        <button class="order-submit">Submit</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="balence-header-block">
+                <h2 class="balence-header"><b>Available balance:</b> £ {{ 2000 - total }}</h2>
+                <h3 class="balence-header"><b>Transactions total:</b> £ {{ total }}</h3>
+            </div>
+        </section>
+        {% if new_cancel != 1 %}
+        <div class="new-block">
+            <span class="new-message">Assume the app is connected to bank, but just add transactions for fun</span>
+            <a href="/jeremy_e51/new"><button class="new-btn">New</button></a>
+        </div>
+        {% endif %}
+        {% block transaction_new %}
+        {% endblock %}
+        {% block transaction_show %}
+        {% endblock %}
+        <section class="transactions-main">
+            <section class="transactions">
+            {% for transaction in transactions %}
+                <div class="transaction">
+                    <div>
+                        <div class="transaction-date">{{ transaction.date }}</div>
+                        <div class="transaction-amount">£ {{ transaction.amount }}</div>
+                        <div class="transaction-name"><a href="/jeremy_e51/{{ transaction.id }}">{{ transaction.name }}</a></div>
+                    </div>
+                    <div class="mer-tag-btn">
+                        {% if transaction.merchant != None %}
+                        <a href="/jeremy_e51/merchants/{{ transaction.merchant.id }}"><button class="merchant-btn">{{ transaction.merchant.name }}</button></a>                    
+                        {% else %}
+                        <button class="none-btn">None</button>
+                        {% endif %}
+                        {% if transaction.tag != None %}
+                        <a href="/jeremy_e51/tags/{{ transaction.tag.id }}"><button class="tag-btn">{{ transaction.tag.name }}</button></a>
+                        {% else %}
+                        <button class="none-btn">None</button>
+                    {% endif %}
+                    </div>
+                    <div class="assign-btn-block">
+                        {% if transaction.merchant == None or transaction.tag == None %}
+                        <a class="assign-btn" href="/jeremy_e51/{{ transaction.id }}/edit"><button>Assign</button></a>    
+                        {% else %}
+                        <button class="assigned-btn">Assigned</button>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            </section>
+        </section>
     </article>
+</main>
 {% endblock  %}
