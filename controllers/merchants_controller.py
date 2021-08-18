@@ -30,9 +30,19 @@ def add_merchant():
 
 @merchants_blueprint.route("/jeremy_e51/merchants/<id>")
 def show_merchant(id):
+    one_merchant = merchant_repo.select(id)
     merchants = merchant_repo.select_all()
     found_transactions = transaction_repo.select_by_merchant(id)
     return render_template(
-        "merchants/index.html",
-        merchants = merchants, found_transactions = found_transactions, login = 1, id = int(id)
+        "merchants/show.html",
+        one_merchant = one_merchant, merchants = merchants, found_transactions = found_transactions, login = 1, id = int(id)
     )
+
+@merchants_blueprint.route("/jeremy_e51/merchants/<id>/delete", methods=["POST"])
+def delete_merchant(id):
+    found_transactions = transaction_repo.select_by_merchant(id)
+    for transaction in found_transactions:
+        transaction.merchant = None
+        transaction_repo.update(transaction)
+    merchant_repo.delete(id)
+    return redirect("/jeremy_e51/merchants")
