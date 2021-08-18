@@ -1,50 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<main class="main-class">
+    <section class="tabs-block">
+        <ul class="tabs">
+            <a href="/jeremy_e51" id="tab-transaction"><li>Transactions</li></a>
+            <a href="/jeremy_e51/merchants" id="tab-merchant"><li>Merchants</li></a>
+            <a href="/jeremy_e51/tags" id="tab-tag"><li>Tags</li></a>
+        </ul>
+    </section>
     <article id="tags-block">
-    <h2>Tags</h2>
-    {% if new_cancel != 1 %}
-        <a href="/jeremy_e51/tags/new"><button>New</button></a>
-    {% endif %}
-    {% block tag_new %}
-    {% endblock %}
-    {% for tag in tags %}
-        {% if tag.id == id %}
-        <div>
-            <hr>
-                <span><a href="/jeremy_e51/tags/{{tag.id}}">{{ tag.name }}</a></span>
-                <span>{{ tag.count }}</span>
-                {% for transaction in found_transactions %}
-                    <section class="transactions-by-tag">
-                        <div>
-                            <span>{{ transaction.date }}</span>/
-                            <span>£ {{ transaction.amount }}</span>
-                        </div>
-                        <div>
-                            <a href="/jeremy_e51/{{ transaction.id }}">
-                            <span>{{ transaction.name }}</span>/
-                            <span>{{ transaction.description }}</span>
-                            </a>
-                        </div>
-                        <div>
-                            {% if transaction.merchant != None %}
-                                <span>{{ transaction.merchant.name }}</span>    
-                            {% else %}
-                                <span>None</span>
-                            {% endif %}
-                        </div>
-                    </section>
-                {% endfor %}
-            <hr>
-        </div>
-        {% else %}
-        <div>
-            <hr>
-                <span><a href="/jeremy_e51/tags/{{tag.id}}">{{ tag.name }}</a></span>
-                <span>{{ tag.count }}</span>
-            <hr>
-        </div>
-        {% endif %}
-    {% endfor %}
-    </article> 
-{% endblock  %}
+        <section class="tags-head">
+            {% if new_cancel != 1 %}
+            <div class="tag-new">
+                <a href="/jeremy_e51/tags/new"><button class="tag-new-btn">New</button></a>
+            </div>
+            {% endif %}
+            {% block tag_new %}
+            {% endblock %}
+        </section>
+        {% block tag_show %}
+        {% endblock %}
+        <section class="tag-items">
+        {% for tag in tags %}
+        <a href="/jeremy_e51/tags/{{tag.id}}">
+            <div class="tag-container">
+                <div class="tag-title">{{ tag.name }}</div>
+                <div class="tag-count">Items: {{ tag.count }}</div>
+            </div>
+        </a>
+        {% endfor %}
+        </section>
+    </article>
+<main>
+{% endblock %}
