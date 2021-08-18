@@ -1,16 +1,17 @@
 {% extends 'tags/index.html' %}
 
 {% block tag_new %}
+    <section class="tag-new-form">
     <form action="/jeremy_e51/tags" method="POST">
-        <hr>
-            <div class="input-margin">
-                <label for="name">Tag Name :</label>
-                <input type="text" name="name" id="name" required>
-            </div>
-            <div>
-                <button>Add</button>
-                <a href="/jeremy_e51/tags" class="cancel-button">Cancel</a>
-            </div>
-        <hr>
+        <div class="input-margin">
+            <label for="name">Tag Name :</label>
+            <input type="text" name="name" id="name" required autofocus>
+        </div>
+        <div class="tag-new-btns">
+            <button class="tag-new-btn">Add</button>
+            <a href="/jeremy_e51/tags" class="tag-cancel-btn">Cancel</a>
+        </div>
     </form>
+    </section>
 {% endblock  %}
+
