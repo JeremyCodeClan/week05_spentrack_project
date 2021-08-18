@@ -10,15 +10,15 @@
         </ul>
     </section>
     <article id="merchants-block">
+        {% if new_cancel != 1 %}
         <section class="merchants-head">
-            {% if new_cancel != 1 %}
             <div class="merchant-new">
                 <a href="/jeremy_e51/merchants/new"><button class="merchant-new-btn">New</button></a>
             </div>
-            {% endif %}
-            {% block merchant_new %}
-            {% endblock %}
         </section>
+        {% endif %}
+        {% block merchant_new %}
+        {% endblock %}
         {% block merchant_show %}
         {% endblock %}
         <section class="merchant-items">
@@ -32,5 +32,5 @@
         {% endfor %}
         </section>
     </article>
-<main>
+</main>
 {% endblock %}
