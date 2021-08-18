@@ -4,22 +4,6 @@ from models.transaction import Transaction
 import repositories.merchant_repository as merchant_repo
 import repositories.tag_repository as tag_repo
 
-def reuseable_select_all(sql):
-    transactions = []
-    results = run_sql(sql)
-    for row in results:
-        tag = None
-        merchant = None
-        if row['tag_id'] != None: tag = tag_repo.select(row['tag_id'])
-        if row['merchant_id'] != None: merchant = merchant_repo.select(row['merchant_id'])
-        transaction = Transaction(
-            row['name'], row['description'],
-            row['amount'], row['date'], tag,
-            merchant, row['id']
-            )
-        transactions.append(transaction)
-    return transactions
-
 def save(transaction):
     sql = "INSERT INTO transactions (name, description, amount, date, tag_id, merchant_id) VALUES (%s, %s, %s, %s, %s, %s) RETURNING *"
     tag_id = None
@@ -38,11 +22,6 @@ def save(transaction):
     result = run_sql(sql, values)
     id = result[0]['id']
     transaction.id = id
-
-def select_all():
-    sql = "SELECT * FROM transactions ORDER BY date DESC"
-    results = reuseable_select_all(sql)
-    return results
 
 def select(id):
     sql = "SELECT * FROM transactions WHERE id = %s"
@@ -93,6 +72,7 @@ def total_amount(transactions):
         total += transaction.amount
     return total
 
+# sorting functions
 def select_by_merchant(merchant_id):
     transactions = []
     sql = "SELECT * FROM transactions WHERE merchant_id = %s"
@@ -116,7 +96,7 @@ def select_by_tag(tag_id):
     results = run_sql(sql, values)
     for row in results:
         merchant = None
-        if row['merchant_id'] != None: merchant = tag_repo.select(row['merchant_id'])
+        if row['merchant_id'] != None: merchant = merchant_repo.select(row['merchant_id'])
         transaction = Transaction(
             row['name'], row['description'],
             row['amount'], row['date'], None,
@@ -124,6 +104,32 @@ def select_by_tag(tag_id):
             )
         transactions.append(transaction)
     return transactions
+
+def reuseable_select_all(sql):
+    transactions = []
+    results = run_sql(sql)
+    for row in results:
+        tag = None
+        merchant = None
+        if row['tag_id'] != None: tag = tag_repo.select(row['tag_id'])
+        if row['merchant_id'] != None: merchant = merchant_repo.select(row['merchant_id'])
+        transaction = Transaction(
+            row['name'], row['description'],
+            row['amount'], row['date'], tag,
+            merchant, row['id']
+            )
+        transactions.append(transaction)
+    return transactions
+
+def select_all():
+    sql = "SELECT * FROM transactions ORDER BY date DESC"
+    results = reuseable_select_all(sql)
+    return results
+
+def select_all_asc():
+    sql = "SELECT * FROM transactions ORDER BY date ASC"
+    results = reuseable_select_all(sql)
+    return results
 
 def order_by_price_desc():
     sql = "SELECT * FROM transactions ORDER BY amount DESC"
@@ -134,4 +140,23 @@ def order_by_price_asc():
     sql = "SELECT * FROM transactions ORDER BY amount ASC"
     results = reuseable_select_all(sql)
     return results
-    
+
+def order_by_price_desc():
+    sql = "SELECT * FROM transactions ORDER BY amount DESC"
+    results = reuseable_select_all(sql)
+    return results
+
+def order_by_price_asc():
+    sql = "SELECT * FROM transactions ORDER BY amount ASC"
+    results = reuseable_select_all(sql)
+    return results
+
+def order_by_name_desc():
+    sql = "SELECT * FROM transactions ORDER BY name DESC"
+    results = reuseable_select_all(sql)
+    return results
+
+def order_by_name_asc():
+    sql = "SELECT * FROM transactions ORDER BY name ASC"
+    results = reuseable_select_all(sql)
+    return results
