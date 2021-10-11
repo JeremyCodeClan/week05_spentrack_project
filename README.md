@@ -44,7 +44,7 @@ Your local machine terminal:
 - PostgreSQL & psycopg library
 
 ## Issue
-Please submit any issue through following link [[Free_To_Play Issue]](https://github.com/jeremyoo/free_to_play_games/issues).
+Please submit any issue through following link [[Spentrack Issue]](https://github.com/jeremyoo/spentrack_project/issues).
 
 ## License
 MIT
