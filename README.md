@@ -1,14 +1,14 @@
 <div align="center">
     <a href="https://jeremyoo.github.io/free_to_play_games/">
-        <h1>Free_To_Play</h1>
+        <h1>Spentrack_project</h1>
     </a>
 
-Free_To_Play allows you to search for available free games on Epicgames through OpenAPI!
+Spentrack allows you to track your spending by classifying types of spendings!
 
-[[Go to Free_To_Play]](https://jeremyoo.github.io/free_to_play_games/)
+[[ 🚧 Hosting under progress... 🚧 ]]
 
 
-/* <img src = "./src/static/example_1.gif" width ="450" /> <img src = "./src/static/example_2.gif" width ="450" /> */
+<!-- <img src = "./src/static/example_1.gif" width ="450" /> <img src = "./src/static/example_2.gif" width ="450" /> -->
 
 </div>
 
