@@ -8,7 +8,7 @@ Spentrack allows you to track your spending by classifying types of spendings!
 [[ 🚧 Hosting under progress... 🚧 ]]
 
 
-<img src = "./static/example_1.gif" width ="450" /> <img src = "./static/example_2.gif" width ="450" />
+<img src = "./static/example_1.gif" width ="400" /> <img src = "./static/example_2.gif" width ="400" />
 
 </div>
 
