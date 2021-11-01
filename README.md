@@ -1,5 +1,5 @@
 <div align="center">
-    <a href="https://jeremyoo.github.io/free_to_play_games/">
+    <a href="https://github.com/jeremyoo/spentrack_project#spentrack_project">
         <h1>Spentrack_project</h1>
     </a>
 
